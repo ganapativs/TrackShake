@@ -1,0 +1,521 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/core-tooltip/core-tooltip.html">
+
+<!--<link rel="import" href="../elements/script-links.html">-->
+
+<polymer-element name="ts-card">
+    <template>
+        <!--custom-->
+        <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+        <style>
+            .ts-card-container {
+                position: absolute;
+                top: 20px;
+                right: 0;
+                left: 0;
+                text-align: center;
+                padding-bottom: 100px;
+            }
+
+            .ts-card {
+                display: inline-block;
+                position: relative;
+                border-radius: 10px 0;
+                margin: 10px;
+                overflow: hidden;
+                text-align: start;
+                background-color: #fff;
+                box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, .15);
+                width: 210px;
+            }
+
+            /*.ts-card:hover{*/
+                /*cursor: pointer;*/
+            /*}*/
+
+            .ts-card-top {
+                position: relative;
+                overflow: hidden;
+                width: 210px;
+                height: 210px;
+                background: #171f66; /* Old browsers */
+                background: -moz-linear-gradient(-45deg,  #171f66 0%, #662d91 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#171f66), color-stop(100%,#662d91)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* IE10+ */
+                background: linear-gradient(135deg,  #171f66 0%,#662d91 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#171f66', endColorstr='#662d91',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+                border-radius: 10px 0 0 0;
+            }
+
+            .ts-card-bottom {
+                padding: 8px;
+                line-height: 1.5;
+                position: relative;
+            }
+
+            .ts-card-album-title {
+                color: #60b99a;
+                font-size: 18px;
+                font-weight: 400;
+                max-width: 170px;
+            }
+
+            .ts-card-artist{
+                font-size: 14px;
+                color: #aaa;
+                max-width: 170px;
+                font-weight: 300;
+            }
+
+            .ellipsis {
+                text-overflow: ellipsis;
+                white-space:nowrap;
+                overflow: hidden;
+            }
+
+            #details {
+                padding: 200px 10% 0;
+            }
+
+            .card {
+                height: calc(100% - 140px);
+                top: 60px;
+                border-radius: 0;
+                text-align: start;
+                overflow: hidden;
+                background: #fff;
+                box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                position: fixed;
+                width: 100%;
+                left: 0;
+            }
+
+            .card-left {
+                width: 30%;
+                position: relative;
+                overflow: hidden;
+                background: #171f66; /* Old browsers */
+                background: -moz-linear-gradient(-45deg,  #171f66 0%, #662d91 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#171f66), color-stop(100%,#662d91)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* IE10+ */
+                background: linear-gradient(135deg,  #171f66 0%,#662d91 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#171f66', endColorstr='#662d91',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            }
+
+            .card-right {
+                padding: 24px;
+            }
+
+            .card-icon {
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                margin-right: 16px;
+            }
+
+            .card-album-title {
+                font-size: 2em;
+            }
+            
+            .album-art-sm{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                border-radius: 10px 0 0 0;
+            }
+
+            .album-art-sm-wrap {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0) 31%, rgba(237,239,244,0) 34%, rgba(25,43,112,0.42) 70%, rgba(24,37,107,0.6) 86%, rgba(23,31,102,0.8) 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(31%,rgba(255,255,255,0)), color-stop(34%,rgba(237,239,244,0)), color-stop(70%,rgba(25,43,112,0.42)), color-stop(86%,rgba(24,37,107,0.6)), color-stop(100%,rgba(23,31,102,0.8))); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(237,239,244,0) 34%,rgba(25,43,112,0.42) 70%,rgba(24,37,107,0.6) 86%,rgba(23,31,102,0.8) 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(237,239,244,0) 34%,rgba(25,43,112,0.42) 70%,rgba(24,37,107,0.6) 86%,rgba(23,31,102,0.8) 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(237,239,244,0) 34%,rgba(25,43,112,0.42) 70%,rgba(24,37,107,0.6) 86%,rgba(23,31,102,0.8) 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(237,239,244,0) 34%,rgba(25,43,112,0.42) 70%,rgba(24,37,107,0.6) 86%,rgba(23,31,102,0.8) 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#cc171f66',GradientType=0 ); /* IE6-9 */
+                border-radius: 10px 0 0 0;
+            }
+
+            .album-art-lg{
+                position: absolute;
+                width: 80%;
+                left: 50%;
+                top: 50%;
+                /*height: 0%;*/
+                transform: translate(-50%,-50%);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            .album-art-lg-wrap {
+                position: absolute;
+                width: 200%;
+                height: 200%;
+                top: -50%;
+                left: -50%;
+                filter: blur(40px);
+                -webkit-filter: blur(40px);
+                -moz-filter: blur(40px);
+                -o-filter: blur(40px);
+                -ms-filter: blur(40px);
+                background-size: cover !important;
+                background-repeat: no-repeat;
+                filter: url("../images/blur.svg#svgBlur");
+            }
+
+            .album-art-lg-wrap-bg {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0) 31%, rgba(247,238,246,0) 34%, rgba(146,39,143,0.28) 70%, rgba(85,35,123,0.4) 85%, rgba(23,31,102,0.6) 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(31%,rgba(255,255,255,0)), color-stop(34%,rgba(247,238,246,0)), color-stop(70%,rgba(146,39,143,0.28)), color-stop(85%,rgba(85,35,123,0.4)), color-stop(100%,rgba(23,31,102,0.6))); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(247,238,246,0) 34%,rgba(146,39,143,0.28) 70%,rgba(85,35,123,0.4) 85%,rgba(23,31,102,0.6) 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(247,238,246,0) 34%,rgba(146,39,143,0.28) 70%,rgba(85,35,123,0.4) 85%,rgba(23,31,102,0.6) 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(247,238,246,0) 34%,rgba(146,39,143,0.28) 70%,rgba(85,35,123,0.4) 85%,rgba(23,31,102,0.6) 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(247,238,246,0) 34%,rgba(146,39,143,0.28) 70%,rgba(85,35,123,0.4) 85%,rgba(23,31,102,0.6) 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#99171f66',GradientType=0 ); /* IE6-9 */
+            }
+
+            .shake-button-wrap{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                -webkit-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -moz-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -o-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                opacity: 0;
+                transform: scale(0);
+                background: rgba(17, 34, 51, 0.7);
+                border-radius: 10px 0 0 0;
+            }
+
+
+            #shake-button{
+                color: #662d91;
+                font-weight: 600;
+                background: #fff;
+                font-size: 18px;
+                margin-top: -25px;
+                -webkit-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -moz-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -o-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            .ts-card-top:hover .shake-button-wrap{
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            .ts-card-top:hover .shake-button-wrap  #shake-button{
+                opacity: 1;
+                transform: scale(1);
+            }
+
+
+            #shake-button i{
+                padding-right: 4px;
+                font-size: 20px;
+            }
+
+            #shake-button::shadow #ripple {
+                color:  #ccc;
+            }
+
+            #shake-button /deep/ .button-content {
+                padding: 0.4em 0.5em;
+            }
+
+            #shake-button:hover{
+                background:#FFFFCC;
+            }
+
+            .currently-playing{
+                position: absolute;
+                width: 100%;
+                height: 50px;
+                bottom: 0;
+                left: 0;
+            }
+
+            .currently-playing img{
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                margin: 4px;
+                float: left;
+                border: 1px solid rgb(194, 25, 76);
+            }
+            .currently-playing .title{
+                line-height: 22px;
+                margin: 0;
+                padding-top: 5px;
+                font-weight: 400;
+                color: rgb(255, 243, 16);;
+                font-size: 16px;
+            }
+            .currently-playing .album{
+                color: #fff;
+                margin: 0;
+                font-size: 14px;
+                font-weight: 300;
+            }
+
+            .currently-playing .title:first-letter,.currently-playing .album:first-letter,.ts-card-album-title:first-letter,.ts-card-artist:first-letter{
+                text-transform: uppercase;
+            }
+
+            .share-genre{
+                position: absolute;
+                top: 4px;
+                right: 4px;
+                color: #aaaaaa;
+                width: 20px;
+                height: 20px;
+                font-size: 20px;
+            }
+
+            .share-genre:hover{
+                color: #fff;
+                cursor: pointer;
+            }
+
+            .trending{
+                position: absolute;
+                top: 4px;
+                right: 4px;
+                color: #FB000A;
+                width: 16px;
+                height: 24px;
+                font-size: 18px;
+                text-align: center;
+            }
+
+            .preview{
+                position: absolute;
+                bottom: 4px;
+                right: 4px;
+                color: #eee;
+                width: 36px;
+                height: 36px;
+                font-size: 30px;
+                text-align: center;
+                overflow: hidden;
+            }
+
+            .preview i:first-child{
+                position: absolute;
+                top: -4px;
+                left: 4px;
+            }
+            .preview i:last-child{
+                position: absolute;
+                font-size: 36px;
+                left: -1px;
+                top: -6px;
+                color: #876FAB;
+                -webkit-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -moz-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -o-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+            }
+
+            .preview i:last-child:hover{
+                color: #464490;
+                cursor: pointer;
+            }
+
+            .preview i:last-child:hover:before{
+                content: "\f43f";
+            }
+
+            .active.preview i:last-child:before{
+                content: "\f43f";
+                color: #464490;
+            }
+
+            .ts-card-bottom /deep/ core-tooltip.preview-tooltip{
+                position: absolute;
+                overflow: visible;
+                width: 40px;
+                height: 40px;
+                bottom: 0;
+                right: 0;
+            }
+            .ts-card-top /deep/ core-tooltip.share-tooltip{
+                position: absolute;
+                overflow: visible;
+                width: 25px;
+                height: 32px;
+                top: 0;
+                right: 0;
+            }
+
+        </style>
+
+        <core-animated-pages selected="{{page}}" transitions="hero-transition" on-core-animated-pages-transition-end="{{complete}}">
+
+            <section>
+
+                <div class="ts-card-container" hero-p>
+
+                    <template repeat="{{items as item}}">
+
+                        <div class="ts-card" hero-id="{{item.permalink}}-{{item.permalink}}" hero?="{{selectedAlbum === item }}">
+                            <div class="ts-card-top" hero-id="{{item.permalink}}-{{item.permalink}}-art" hero?="{{selectedAlbum === item}}">
+                                <img class="album-art-sm" src="{{item.artwork_url | getImg300}}" if="{{item.artwork_url!=null}}">
+                                <div class="album-art-sm-wrap"></div>
+                                <div class="shake-button-wrap" horizontal layout center center-justified>
+                                    <core-tooltip class="share-tooltip" label='Help us grow :)' position="left">
+                                        <div class="share-genre">
+                                            <i class="icon ion-android-share-alt"></i>
+                                        </div>
+                                    </core-tooltip>
+                                    <paper-button raised id="shake-button" on-tap="{{transition}}"><i class="icon ion-beer"></i> SHAKE</paper-button>
+                                </div>
+                                <div class="currently-playing">
+                                    <img src="../images/placeholder/logo300.png" draggable="false">
+                                    <h3 class="title ellipsis">{{item.permalink}}</h3>
+                                    <p class="album ellipsis">{{item.permalink}}</p>
+                                </div>
+                                <!--<paper-ripple fit></paper-ripple>-->
+                            </div>
+                            <div class="ts-card-bottom">
+                                <div class="ts-card-album-title ellipsis">{{item.permalink}}</div>
+                                <div class="ts-card-artist ellipsis">22 people listening </div>
+                                <div class="trending"><i class="icon ion-fireball"></i></div>
+                                <core-tooltip class="preview-tooltip" label='Preview current song' position="left">
+                                    <div class="preview" on-tap="{{preview_area_show}}">
+                                        <i class="icon ion-headphone"></i>
+                                        <i class="icon ion-ios-glasses-outline"></i>
+                                    </div>
+                                </core-tooltip>
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
+            </section>
+
+            <section id="details">
+
+                <div class="card" layout horizontal hero-id="{{selectedAlbum.permalink}}-{{selectedAlbum.permalink}}" hero on-tap="{{transition}}">
+                    <div class="card-left" hero-id="{{selectedAlbum.permalink}}-{{selectedAlbum.permalink}}-art" hero>
+                        <div class="album-art-lg-wrap" style="background: url({{selectedAlbum.artwork_url | getImg500}})" if="{{selectedAlbum.artwork_url!=null}}"></div>
+                        <div class="album-art-lg-wrap-bg"></div>
+                        <img class="album-art-lg" src="{{selectedAlbum.artwork_url | getImg500}}" if="{{selectedAlbum.artwork_url!=null}}">
+                        <paper-ripple fit></paper-ripple>
+                    </div>
+                    <div class="card-right" flex>
+                        <div layout horizontal center>
+                            <div>
+                                <div class="card-icon" style="background:{{selectedAlbum.color}};"></div>
+                            </div>
+                            <div flex>
+                                <div class="card-album-title">{{selectedAlbum.permalink}}</div>
+                                <div class="card-album-artist">{{selectedAlbum.permalink}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </core-animated-pages>
+
+        <core-ajax
+                auto
+                url="../json/card_data.json"
+                params='{"alt":"json", "q":"chrome"}'
+                handleAs="json"
+                on-core-response="{{handleResponse}}"></core-ajax>
+
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="0" width="0">
+            <defs>
+                <filter id="blur" x="0" y="0">
+                    <feGaussianBlur stdDeviation="40"></feGaussianBlur>
+                </filter>
+            </defs>
+        </svg>
+
+    </template>
+    <script>
+
+        Polymer('ts-card', {
+
+            page: 0,
+            preloader:[],
+            items: '',
+            handleResponse:function(data){
+              this.items=data["detail"]["response"];
+                console.log(this.items);
+            },
+            selectedAlbum: null,
+
+            transition: function(e) {
+                if (this.page === 0 && e.target.templateInstance.model.item) {
+                    this.selectedAlbum = e.target.templateInstance.model.item;
+                    this.page = 1;
+                } else {
+                    this.page = 0;
+                }
+            },
+            getImg300: function (value) {
+                if(value!=null){
+                    var img=value.replace("large", "t500x500");
+                    this.preloader.push(img);
+                    return img;
+                }
+                else
+                    return 'images/placeholder/logo300.png';
+            },
+            getImg500: function (value) {
+                if(value!=null)
+                    return value.replace("large", "t500x500");
+                else
+                    return 'images/placeholder/logo500.png';
+            },
+            preview_area_show:function(event, detail, sender){
+                if($(sender).hasClass('active')){
+                    $(sender).toggleClass('active');
+                }
+                else{
+                    var els = this.shadowRoot.querySelectorAll('.preview');
+                    Array.prototype.forEach.call(els, function(el, i) {
+                        el.classList.remove('active');
+                    });
+                    $(sender).toggleClass('active');
+                }
+            },
+            domReady: function () {
+                $.preLoadImages(this.preloader);
+                $('.loading').slideUp(1000);
+//                $('.title').qtip();
+            }
+        });
+
+    </script>
+
+</polymer-element>
