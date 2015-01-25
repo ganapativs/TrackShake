@@ -1,0 +1,71 @@
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/core-tooltip/core-tooltip.html">
+
+<!--<link rel="import" href="../elements/script-links.html">-->
+
+<polymer-element name="ts-player">
+    <template>
+        <!--custom-->
+        <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <style>
+
+            :host{
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                height: 80px;
+                width: 100%;
+                z-index: 99998;
+                background: #171f66; /* Old browsers */
+                background: -moz-linear-gradient(-45deg,  #171f66 0%, #662d91 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#171f66), color-stop(100%,#662d91)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* IE10+ */
+                background: linear-gradient(135deg,  #171f66 0%,#662d91 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#171f66', endColorstr='#662d91',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            }
+
+        </style>
+
+        <core-ajax
+                auto
+                url="../json/card_data.json"
+                params='{"alt":"json", "q":"chrome"}'
+                handleAs="json"
+                on-core-response="{{handleResponse}}"></core-ajax>
+
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="0" width="0">
+            <defs>
+                <filter id="blur" x="0" y="0">
+                    <feGaussianBlur stdDeviation="40"></feGaussianBlur>
+                </filter>
+            </defs>
+        </svg>
+
+    </template>
+    <script>
+
+        Polymer('ts-player', {
+
+            page: 0,
+            preloader:[],
+            items: '',
+            handleResponse:function(data){
+                this.items=data["detail"]["response"];
+            },
+            selectedAlbum: null,
+
+            domReady: function () {
+
+            }
+        });
+
+    </script>
+
+</polymer-element>

@@ -54,22 +54,6 @@ core-toolbar {
     }
 }
 
-.player{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: 80px;
-    width: 100%;
-    z-index: 99998;
-    background: #171f66; /* Old browsers */
-    background: -moz-linear-gradient(-45deg,  #171f66 0%, #662d91 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#171f66), color-stop(100%,#662d91)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* IE10+ */
-    background: linear-gradient(135deg,  #171f66 0%,#662d91 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#171f66', endColorstr='#662d91',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-}
 
 /*Loading*/
 .loading{

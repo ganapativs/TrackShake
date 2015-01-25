@@ -18,4 +18,4 @@ $(function($) {
 
 $(window).load(function(){
     console.log($(window).width());
-})
+});

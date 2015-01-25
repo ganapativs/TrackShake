@@ -11,7 +11,6 @@
     <template>
         <!--custom-->
         <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
         <style>
             .ts-card-container {
                 position: absolute;
@@ -193,7 +192,7 @@
                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#99171f66',GradientType=0 ); /* IE6-9 */
             }
 
-            .shake-button-wrap{
+            .shake_button-wrap{
                 position: absolute;
                 width: 100%;
                 height: 100%;
@@ -210,7 +209,7 @@
             }
 
 
-            #shake-button{
+            #shake_button{
                 color: #662d91;
                 font-weight: 600;
                 background: #fff;
@@ -224,31 +223,31 @@
                 transform: scale(0);
             }
 
-            .ts-card-top:hover .shake-button-wrap{
+            .ts-card-top:hover .shake_button-wrap{
                 opacity: 1;
                 transform: scale(1);
             }
 
-            .ts-card-top:hover .shake-button-wrap  #shake-button{
+            .ts-card-top:hover .shake_button-wrap  #shake_button{
                 opacity: 1;
                 transform: scale(1);
             }
 
 
-            #shake-button i{
+            #shake_button i{
                 padding-right: 4px;
                 font-size: 20px;
             }
 
-            #shake-button::shadow #ripple {
+            #shake_button::shadow #ripple {
                 color:  #ccc;
             }
 
-            #shake-button /deep/ .button-content {
+            #shake_button /deep/ .button-content {
                 padding: 0.4em 0.5em;
             }
 
-            #shake-button:hover{
+            #shake_button:hover{
                 background:#FFFFCC;
             }
 
@@ -434,13 +433,13 @@
                             <div class="ts-card-top" hero-id="{{item.permalink}}-{{item.permalink}}-art" hero?="{{selectedAlbum === item}}">
                                 <img class="album-art-sm" src="{{item.artwork_url | getImg300}}" if="{{item.artwork_url!=null}}">
                                 <div class="album-art-sm-wrap"></div>
-                                <div class="shake-button-wrap" horizontal layout center center-justified>
+                                <div class="shake_button-wrap" horizontal layout center center-justified>
                                     <core-tooltip class="share-tooltip" label='Help us grow :)' position="left">
                                         <div class="share-genre">
                                             <i class="icon ion-android-share-alt"></i>
                                         </div>
                                     </core-tooltip>
-                                    <paper-button raised id="shake-button" on-tap="{{transition}}"><i class="icon ion-beer"></i> SHAKE</paper-button>
+                                    <paper-button raised id="shake_button" on-tap="{{transition}}"><i class="icon ion-beer"></i> SHAKE</paper-button>
                                 </div>
                                 <div class="currently-playing">
                                     <img src="../images/placeholder/logo300.png" draggable="false">
