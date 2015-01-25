@@ -373,6 +373,53 @@
                 right: 0;
             }
 
+
+            @media all and (max-width: 767px){
+
+                .ts-card {
+                    width: 160px;
+                    margin: 4px;
+                }
+
+                .ts-card-top {
+                    width: 160px;
+                    height: 160px;
+                }
+
+                .ts-card-album-title {
+                    max-width: 110px;
+                    font-size: 14px;
+                }
+
+                .ts-card-artist{
+                    max-width: 110px;
+                    font-size: 12px;
+                }
+
+                .currently-playing img{
+                    width: 30px;
+                    height: 30px;
+                }
+
+                .currently-playing .title{
+                    font-size: 14px;
+                    line-height: 16px;
+                }
+
+                .currently-playing .album{
+                    font-size: 12px;
+                }
+
+                .currently-playing {
+                    height: 40px;
+                }
+                .trending {
+                    top: -2px;
+                }
+
+            }
+
+
         </style>
 
         <core-animated-pages selected="{{page}}" transitions="hero-transition" on-core-animated-pages-transition-end="{{complete}}">
