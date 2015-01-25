@@ -11,7 +11,7 @@
     <template>
         <!--custom-->
         <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
+        <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
         <style>
             .ts-card-container {
                 position: absolute;
@@ -430,9 +430,9 @@
                     </div>
                     <div class="card-right" flex>
                         <div layout horizontal center>
-                            <div>
-                                <div class="card-icon" style="background:{{selectedAlbum.color}};"></div>
-                            </div>
+                            <!--<div>-->
+                                <!--<div class="card-icon" style="background:{{selectedAlbum.color}};"></div>-->
+                            <!--</div>-->
                             <div flex>
                                 <div class="card-album-title">{{selectedAlbum.permalink}}</div>
                                 <div class="card-album-artist">{{selectedAlbum.permalink}}</div>
@@ -512,7 +512,7 @@
             domReady: function () {
                 $.preLoadImages(this.preloader);
                 $('.loading').slideUp(1000);
-//                $('.title').qtip();
+//                $(this.$.id).css({'color':'green'});
             }
         });
 
