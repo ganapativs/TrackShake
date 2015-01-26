@@ -96,15 +96,6 @@ core-toolbar {
     font-weight: 500;
 }
 
-@media (max-width: 767px){
-    .choose i{
-        font-size: 21px;
-    }
-    .choose h2{
-        font-size: 1.2em;
-    }
-}
-
 body /deep/ .core-tooltip{
     background: #171f66; /* Old browsers */
     background: -moz-linear-gradient(-45deg,  #171f66 0%, #662d91 100%); /* FF3.6+ */
@@ -118,6 +109,15 @@ body /deep/ .core-tooltip{
     font-family: 'RobotoDraft', sans-serif;
 }
 
-body /deep/ .core-tooltip{
-    font-size: 9px;
+@media (max-width: 767px){
+    .choose i{
+        font-size: 21px;
+    }
+    .choose h2{
+        font-size: 1.2em;
+    }
+
+    body /deep/ .core-tooltip{
+        font-size: 9px;
+    }
 }

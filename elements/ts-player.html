@@ -33,6 +33,8 @@
 
         </style>
 
+        <p>hi</p>
+
         <core-ajax
                 auto
                 url="../json/card_data.json"
@@ -52,14 +54,9 @@
     <script>
 
         Polymer('ts-player', {
-
-            page: 0,
-            preloader:[],
-            items: '',
             handleResponse:function(data){
                 this.items=data["detail"]["response"];
             },
-            selectedAlbum: null,
 
             domReady: function () {
 
