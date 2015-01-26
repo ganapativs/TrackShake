@@ -21,6 +21,7 @@
                 height: 80px;
                 width: 100%;
                 z-index: 99998;
+                box-shadow: 0px -1px 2px 0px rgba(21, 21, 21, 0.5);
                 background: #171f66; /* Old browsers */
                 background: -moz-linear-gradient(-45deg,  #171f66 0%, #662d91 100%); /* FF3.6+ */
                 background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#171f66), color-stop(100%,#662d91)); /* Chrome,Safari4+ */
@@ -31,9 +32,76 @@
                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#171f66', endColorstr='#662d91',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
             }
 
+            .player-wrap{
+                height: 80px;
+                width: 90%;
+                margin: 0 auto;
+                position: relative;
+            }
+
+            .playing_black_wrap{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: rgba(0, 0, 0, 0.4);
+            }
+
+            .now_playing_img{
+                float: left;
+                width: 70px;
+                height: 70px;
+                border-radius: 50% 5px 50% 50%;
+                margin: 0 10px 0 0;
+                -webkit-box-shadow: 0px 3px 0px 0px rgba(235,224,18,1);
+                -moz-box-shadow: 0px 3px 0px 0px rgba(235,224,18,1);
+                box-shadow: 0px 3px 0px 0px rgba(235,224,18,1);
+                -webkit-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -moz-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -o-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+            }
+
+            .now_playing_img:hover{
+                border-radius: 5px;
+                -webkit-box-shadow:none;
+                -moz-box-shadow:none;
+                box-shadow:none;
+            }
+
+            .ellipsis {
+                text-overflow: ellipsis;
+                white-space:nowrap;
+                overflow: hidden;
+            }
+
+            .now_playing_title{
+                color: #26D37E;
+                margin: 10px 5px 10px 0;
+                font-weight: 500;
+                font-size: 17px;
+            }
+
+            .now_playing_album{
+                color: #FFFFFF;
+                margin: 0 5px 5px 0;
+                font-weight: 300;
+                font-size: 13px;
+            }
         </style>
 
-        <p>hi</p>
+        <div class="playing_black_wrap"></div>
+        <div horizontal layout center class="player-wrap">
+            <div flex  self-center two class="now_playing">
+                <img class="now_playing_img" src="../images/placeholder/logo300.png">
+                <h3 class="now_playing_title ellipsis">4-leandro-costa-pra-vencer-40</h3>
+                <h4 class="now_playing_album ellipsis">4-leandro-costa-pra-vencer-40</h4>
+            </div>
+            <div flex  self-center two>Beta</div>
+            <div flex  self-center six>Gamma</div>
+            <div flex  self-center one>Delta</div>
+        </div>
 
         <core-ajax
                 auto
