@@ -40,8 +40,8 @@
       <file leaf-file-name="ts-player.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/elements/ts-player.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36227223" vertical-offset="2365" max-vertical-offset="4775">
-              <caret line="159" column="31" selection-start-line="159" selection-start-column="31" selection-end-line="159" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.52625936" vertical-offset="1498" max-vertical-offset="4792">
+              <caret line="117" column="31" selection-start-line="117" selection-start-column="31" selection-end-line="117" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -429,7 +429,13 @@
       <option name="project" value="LOCAL" />
       <updated>1422375636669</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Player UI">
+      <created>1422375942865</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1422375942865</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -908,8 +914,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/elements/ts-player.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36227223" vertical-offset="2365" max-vertical-offset="4775">
-          <caret line="159" column="31" selection-start-line="159" selection-start-column="31" selection-end-line="159" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.52625936" vertical-offset="1498" max-vertical-offset="4792">
+          <caret line="117" column="31" selection-start-line="117" selection-start-column="31" selection-end-line="117" selection-end-column="31" />
           <folding />
         </state>
       </provider>
