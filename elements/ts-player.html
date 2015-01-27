@@ -114,7 +114,8 @@
             }
 
             .player-wrap i:hover{
-                color: rgb(229, 27, 42);
+                /*color: rgb(229, 27, 42);*/
+                color: rgb(243, 243, 16);
                 cursor: pointer;
             }
 
@@ -160,6 +161,7 @@
                 <h4 class="now_playing_album ellipsis">4-leandro-costa-pra-vencer-40</h4>
                 </core-tooltip>
             </div>
+            <div flex  self-center one class="player_extra_space"></div>
             <div flex horizontal layout center self-center three class="play_controls">
                 <div flex  self-center one></div>
                     <div flex  self-center two class="vote play_downvote">
@@ -179,14 +181,15 @@
                     </div>
                 <div flex  self-center one></div>
             </div>
+            <div flex  self-center one class="player_extra_space"></div>
             <div flex horizontal layout center self-center two class="play_extra_controls">
                 <div flex  self-center one></div>
-                <div flex  self-center one class="play_voice">
+                <div flex  self-center two class="play_voice">
                     <core-tooltip class="preview-tooltip" label='Change volume' position="top">
                     <i class="icon ion-android-volume-up"></i>
                     </core-tooltip>
                 </div>
-                <div flex  self-center one class="play_voice">
+                <div flex  self-center two class="play_voice">
                     <core-tooltip class="preview-tooltip" label='Turn off voice controls' position="top">
                     <i class="icon ion-android-microphone"></i>
                     </core-tooltip>
