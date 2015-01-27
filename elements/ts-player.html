@@ -89,18 +89,96 @@
                 font-weight: 300;
                 font-size: 13px;
             }
+
+            .play_controls{
+                text-align: center;
+                color: #fff;
+                font-size: 3rem;
+            }
+
+            .play_extra_controls{
+                text-align: center;
+                color: #fff;
+                font-size: 2rem;
+            }
+
+            .play_controls .vote{
+                font-size: 2rem;
+            }
+
+            @media all and (max-width: 1399px){
+                .player_extra_space{
+                    flex: 1;
+                }
+            }
+
+            @media all and (max-width: 1199px){
+                .player_extra_space{
+                    display: none;
+                }
+            }
+
+            @media all and (max-width: 991px){
+                .now_playing{
+                    display: none;
+                }
+
+                .play_extra_controls{
+                    font-size: 1.5rem;
+                }
+
+                .play_controls{
+                    font-size: 2.5rem;
+                }
+
+                .play_controls .vote{
+                    font-size: 1.5rem;
+                }
+            }
         </style>
 
         <div class="playing_black_wrap"></div>
         <div horizontal layout center class="player-wrap">
-            <div flex  self-center two class="now_playing">
+            <div flex  self-center three class="player_extra_space"></div>
+            <div flex  self-center three class="now_playing">
                 <img class="now_playing_img" src="../images/placeholder/logo300.png">
                 <h3 class="now_playing_title ellipsis">4-leandro-costa-pra-vencer-40</h3>
                 <h4 class="now_playing_album ellipsis">4-leandro-costa-pra-vencer-40</h4>
             </div>
-            <div flex  self-center two>Beta</div>
-            <div flex  self-center six>Gamma</div>
-            <div flex  self-center one>Delta</div>
+            <div flex horizontal layout center self-center three class="play_controls">
+                <div flex  self-center one></div>
+                    <div flex  self-center two class="vote play_downvote">
+                        <core-tooltip class="preview-tooltip" label='Dislike current song' position="top">
+                        <i class="icon ion-thumbsdown"></i>
+                        </core-tooltip>
+                    </div>
+                    <div flex  self-center two class="play_pause">
+                        <core-tooltip class="preview-tooltip" label='Play current song' position="top">
+                        <i class="icon ion-play"></i>
+                        </core-tooltip>
+                    </div>
+                    <div flex  self-center two class="vote play_upvote">
+                        <core-tooltip class="preview-tooltip" label='Like current song' position="top">
+                        <i class="icon ion-thumbsup"></i>
+                        </core-tooltip>
+                    </div>
+                <div flex  self-center one></div>
+            </div>
+            <div flex horizontal layout center self-center two class="play_extra_controls">
+                <div flex  self-center one></div>
+                <div flex  self-center one class="play_voice">
+                    <core-tooltip class="preview-tooltip" label='Change volume' position="top">
+                    <i class="icon ion-android-volume-up"></i>
+                    </core-tooltip>
+                </div>
+                <div flex  self-center one class="play_voice">
+                    <core-tooltip class="preview-tooltip" label='Turn off voice controls' position="top">
+                    <i class="icon ion-android-microphone"></i>
+                    </core-tooltip>
+                </div>
+                <div flex  self-center one></div>
+            </div>
+            <div flex  self-center three class="player_extra_space"></div>
         </div>
 
         <core-ajax
