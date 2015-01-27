@@ -106,6 +106,17 @@
                 font-size: 2rem;
             }
 
+            .player-wrap i{
+                -webkit-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -moz-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -o-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+            }
+
+            .player-wrap i:hover{
+                color: rgb(229, 27, 42);
+            }
+
             @media all and (max-width: 1399px){
                 .player_extra_space{
                     flex: 1;
@@ -114,6 +125,7 @@
 
             @media all and (max-width: 1199px){
                 .player_extra_space{
+                    flex: 0;
                     display: none;
                 }
             }
@@ -141,9 +153,11 @@
         <div horizontal layout center class="player-wrap">
             <div flex  self-center three class="player_extra_space"></div>
             <div flex  self-center three class="now_playing">
+                <core-tooltip class="preview-tooltip" label='Currently playing' position="top">
                 <img class="now_playing_img" src="../images/placeholder/logo300.png">
                 <h3 class="now_playing_title ellipsis">4-leandro-costa-pra-vencer-40</h3>
                 <h4 class="now_playing_album ellipsis">4-leandro-costa-pra-vencer-40</h4>
+                </core-tooltip>
             </div>
             <div flex horizontal layout center self-center three class="play_controls">
                 <div flex  self-center one></div>
