@@ -109,21 +109,63 @@
                 height: 20px;
                 border-radius: 50%;
                 vertical-align: text-bottom;
+                z-index: 1;
             }
 
             .message_user .u_name{
                 color: #8d8d8d;
                 font-weight: 500;
                 font-size: 11px;
-                vertical-align: text-top;
+                vertical-align: text-bottom;
+                line-height: 20px;
+                visibility: hidden;
+                margin-left: -9999px;
+                width: 0;
+                z-index: 0;
+                -webkit-transform: scale(0);
+                -moz-transform: scale(0);
+                -ms-transform: scale(0);
+                -o-transform: scale(0);
+                transform: scale(0);
+                -webkit-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -moz-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -o-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
             }
 
             .message_user{
                 padding: 0 4px;
-                background: #fff;
+                background: transparent;
                 border-radius: 20px;
                 margin: 0 0 4px -10px;
                 display: inline-block;
+                overflow: hidden;
+                width: 20px;
+                height: 23px;
+                vertical-align: middle;
+                -webkit-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -moz-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                -o-transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+                transition: all 250ms cubic-bezier(0.650, 0.045, 0.405, 1.000);
+            }
+
+            .message_user:hover{
+                display: inline-block;
+                background: #fff;
+                width: auto;
+                height: 23px;
+                vertical-align: middle;
+            }
+
+            .message_user:hover .u_name{
+                visibility: visible;
+                margin-left: 0;
+                width: auto;
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
             }
 
             .send-container {
