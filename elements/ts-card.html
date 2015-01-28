@@ -5,6 +5,9 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/core-tooltip/core-tooltip.html">
 
+
+<link rel="import" href="../elements/chat-box.html">
+
 <!--<link rel="import" href="../elements/script-links.html">-->
 
 <polymer-element name="ts-card">
@@ -474,13 +477,14 @@
                         <img class="album-art-lg" src="{{selectedAlbum.artwork_url | getImg500}}" if="{{selectedAlbum.artwork_url!=null}}">
                         <paper-ripple fit></paper-ripple>
                     </div>
-                    <div class="card-right" flex>
-                        <div layout horizontal center>
-                            <div flex>
-                                <div class="card-album-title">{{selectedAlbum.permalink}}</div>
-                                <div class="card-album-artist">{{selectedAlbum.permalink}}</div>
-                            </div>
+                    <div class="card-right" relative flex>
+                        <div fit vertical layout>
+                            <div class="card-album-title">{{selectedAlbum.permalink}}</div>
+                            <div class="card-album-artist">{{selectedAlbum.permalink}}</div>
+                            <ts-chatbox flex relative></ts-chatbox>
                         </div>
+                        <!--<div relative style="height: 100%;">-->
+                        <!--</div>-->
                     </div>
                 </div>
 

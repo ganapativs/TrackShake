@@ -1,0 +1,209 @@
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/core-tooltip/core-tooltip.html">
+
+<polymer-element name="ts-chatbox">
+    <template>
+        <!--custom-->
+        <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <style>
+
+            .phone-containter {
+                width: 100%;
+                height: 100%;
+            }
+            .phone {
+                height: 60%;
+                border: 1px solid #dcdcdc;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            /* Messages baloon */
+            .message {
+                margin: 10px 0;
+                overflow: hidden;
+            }
+            .message-text {
+                padding: 7px 20px;
+                float: right;
+                clear: both;
+                border-radius: 25px;
+                position: relative;
+                margin-bottom: 1px;
+            }
+            .message.left .message-text {
+                margin-right: 70px;
+                margin-left: 20px;
+                background-color: #FFD0B3;
+                float: left;
+            }
+            .message.right .message-text {
+                margin-left: 70px;
+                margin-right: 20px;
+                background: #171f66; /* Old browsers */
+                background: -moz-linear-gradient(-45deg,  #171f66 0%, #662d91 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#171f66), color-stop(100%,#662d91)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* IE10+ */
+                background: linear-gradient(135deg,  #171f66 0%,#662d91 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#171f66', endColorstr='#662d91',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+                color: #fff;
+                float: right;
+            }
+
+            .message-text:last-child:before,
+            .message-text:last-child:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                width: 35px;
+                height: 25px;
+                z-index: -1;
+            }
+
+            .message.right .message-text:before,
+            .message.right .message-text:after {
+                border-radius: 0 0 0 50%;
+            }
+            .message.right .message-text:before {
+                height: 20px;
+                right: -23px;
+                background: #171f66; /* Old browsers */
+                background: -moz-linear-gradient(-45deg,  #171f66 0%, #662d91 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#171f66), color-stop(100%,#662d91)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(-45deg,  #171f66 0%,#662d91 100%); /* IE10+ */
+                background: linear-gradient(135deg,  #171f66 0%,#662d91 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#171f66', endColorstr='#662d91',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            }
+            .message.right .message-text:after {
+                right: -35px;
+                bottom: -3px;
+                background-color: #fff;
+            }
+
+
+            .message.left .message-text:before,
+            .message.left .message-text:after {
+                border-radius: 0 0 50% 0;
+            }
+            .message.left .message-text:before {
+                height: 20px;
+                left: -23px;
+                background-color: #FFD0B3;
+            }
+            .message.left .message-text:after {
+                left: -35px;
+                bottom: -3px;
+                background-color: #fff;
+            }
+
+            .message_user .msg_pic{
+                display: inline;
+                margin: 2px 0 1px 0;
+                height: 20px;
+                border-radius: 50%;
+                vertical-align: text-bottom;
+            }
+
+            .message_user .u_name{
+                color: #8d8d8d;
+                font-weight: 500;
+                font-size: 11px;
+                vertical-align: text-top;
+            }
+
+            .message_user{
+                padding: 0 4px;
+                background: #fff;
+                border-radius: 20px;
+                margin: 0 0 4px -10px;
+                display: inline-block;
+            }
+
+            .send-container {
+                background-color: #f6f6f6;
+                border: 1px solid #dcdcdc;
+                margin-top: -1px;
+                padding: 10px;
+            }
+            .send-input {
+                border-radius: 5px;
+                border: 1px solid #dbdbdb;
+                background-color: #fff;
+                padding: 5px 5px;
+                font-size: 1em;
+                width: 78%;
+            }
+            .send-btn {
+                text-decoration: none;
+                color: #939297;
+                font-weight: bold;
+                background-color: transparent;
+                border: none;
+                font-size: 1em;
+                cursor: pointer;
+            }
+        </style>
+
+        <div fit vertical layout>
+            <div flex>
+                <div id="phone" class="phone">
+                    <div class="message left">
+                        <div class="message-text">
+                            <div class="message_user l_user">
+                                <img src="http://placehold.it/250/E8117F/ffffff" class="msg_pic" />
+                                <span class="u_name">Ganapati V S</span>
+                            </div>
+                            Hello!</div>
+                    </div>
+                    <div class="message right"><div class="message-text">Hi!
+                    </div><div class="message-text">Where are you now?
+                    </div></div><div class="message left"><div class="message-text">I'm at a party of Clara</div></div>
+                </div>
+
+                <div class="send-container">
+                    <form id="send">
+                        <input type="text" id="msgInput" class="send-input" placeholder="Message" />
+                        <input type="submit" class="send-btn" value="Send">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <core-ajax
+                auto
+                url="../json/card_data.json"
+                params='{"alt":"json", "q":"chrome"}'
+                handleAs="json"
+                on-core-response="{{handleResponse}}"></core-ajax>
+
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="0" width="0">
+            <defs>
+                <filter id="blur" x="0" y="0">
+                    <feGaussianBlur stdDeviation="40"></feGaussianBlur>
+                </filter>
+            </defs>
+        </svg>
+
+    </template>
+    <script>
+
+        Polymer('ts-chatbox', {
+            handleResponse:function(data){
+                this.items=data["detail"]["response"];
+            },
+
+            domReady: function () {
+
+            }
+        });
+
+    </script>
+
+</polymer-element>
